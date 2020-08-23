@@ -1,24 +1,31 @@
 import mysql.connector
 from ressources.settings import CONNECTION_DATA
-from ressources.constants import (QUERY_CREATION_LIST,QUERY_USE_DATABASE,
-                                  QUERY_INSERT_DATA_TO_PRODUCTS_TABLE)
+from ressources.constants import (
+    QUERY_CREATION_LIST,
+    QUERY_USE_DATABASE,
+    QUERY_INSERT_DATA_TO_PRODUCTS_TABLE,
+    QUERY_INSERT_DATA_TO_FAVORITES_TABLE,
+)
 
-class DataBase():
-    #mysql connection
+
+class DataBase:
+    """all database requests"""
+
+    # mysql connection
     try:
-        #create connection
+        # create connection
         connection = mysql.connector.connect(
-                host = CONNECTION_DATA['host'],
-                user = CONNECTION_DATA['user'],
-                password = CONNECTION_DATA['password']
+            host=CONNECTION_DATA['host'],
+            user=CONNECTION_DATA['user'],
+            password=CONNECTION_DATA['password'],
         )
         cursor = connection.cursor()
-    #if connection error return the error
+    # if connection error return the error
     except mysql.connector.Error as connect_error:
         print(connect_error)
 
     def __init__(self):
-        self.categories_dict ={}
+        self.categories_dict = {}
 
     def create_data_base(self):
         """create data base and tables"""
@@ -47,12 +54,14 @@ class DataBase():
             insert_request = QUERY_INSERT_DATA_TO_PRODUCTS_TABLE
             for product in products:
                 try:
-                    data_to_add = ( product.generic_name_fr,
-                                    product.nutriscore_grade,
-                                    product.url,
-                                    product.purchase_places,
-                                    product.code,
-                                    product.id_category)
+                    data_to_add = (
+                        product.generic_name_fr,
+                        product.nutriscore_grade,
+                        product.url,
+                        product.purchase_places,
+                        product.code,
+                        product.id_category,
+                    )
                     DataBase.cursor.execute(insert_request, data_to_add)
                 except:
                     pass
@@ -60,17 +69,57 @@ class DataBase():
         except mysql.connector.Error as connect_error:
             print(connect_error)
 
+    def add_favorites(self, id_product_S, id_product_R):
+        """add favorites to products table"""
+        try:
+            insert_request = QUERY_INSERT_DATA_TO_FAVORITES_TABLE
+            try:
+                data_to_add = (
+                    id_product_S.id_product,
+                    id_product_R.id_product,
+                )
+                DataBase.cursor.execute(insert_request, data_to_add)
+            except:
+                pass
+            DataBase.connection.commit()
+        except mysql.connector.Error as connect_error:
+            print(connect_error)
+
     def get_category_product_list(self, chosen_category):
-        request = 'SELECT * FROM products WHERE id_category = "{}"'.format(chosen_category)
+        """ get a product list from one categorie saved in products table"""
+        request = 'SELECT * FROM products WHERE id_category = "{}"'.format(
+            chosen_category
+        )
         DataBase.cursor.execute(request)
         category_product_list = DataBase.cursor.fetchall()
         return category_product_list
 
     def get_product_by_nutriscore(self, product_to_replace):
-        request = ('SELECT * FROM products '
-                   'WHERE id_category = "{}"'
-                   'AND nutriscore_grade < "{}"'
-                   .format(product_to_replace.id_category, product_to_replace.nutriscore_grade))
+        """get a product list from one categorie with better nutriscore"""
+        request = (
+            'SELECT * FROM products '
+            'WHERE id_category = "{}"'
+            'AND nutriscore_grade < "{}"'.format(
+                product_to_replace.id_category,
+                product_to_replace.nutriscore_grade,
+            )
+        )
         DataBase.cursor.execute(request)
         replacement_product_list = DataBase.cursor.fetchall()
         return replacement_product_list
+
+    def get_all_favorites(self):
+        """get list of all favorites"""
+        request = 'SELECT * FROM favorites'
+        DataBase.cursor.execute(request)
+        favorites = DataBase.cursor.fetchall()
+        return favorites
+
+    def get_product_by_id(self, id_product):
+        """ get the product with the given id """
+        request = 'SELECT * FROM products ' 'WHERE id_product = "{}"'.format(
+            id_product
+        )
+        DataBase.cursor.execute(request)
+        product = DataBase.cursor.fetchall()
+        return product
