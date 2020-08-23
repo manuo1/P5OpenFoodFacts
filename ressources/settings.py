@@ -1,4 +1,5 @@
 import os
+
 import yaml
 
 # create the path to the game's main directory for user's operating system

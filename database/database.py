@@ -1,11 +1,10 @@
 import mysql.connector
+
+from ressources.constants import (QUERY_CREATION_LIST,
+                                  QUERY_INSERT_DATA_TO_FAVORITES_TABLE,
+                                  QUERY_INSERT_DATA_TO_PRODUCTS_TABLE,
+                                  QUERY_USE_DATABASE)
 from ressources.settings import CONNECTION_DATA
-from ressources.constants import (
-    QUERY_CREATION_LIST,
-    QUERY_USE_DATABASE,
-    QUERY_INSERT_DATA_TO_PRODUCTS_TABLE,
-    QUERY_INSERT_DATA_TO_FAVORITES_TABLE,
-)
 
 
 class DataBase:

@@ -1,10 +1,8 @@
 import requests
-from ressources.constants import (
-    PAYLOAD,
-    ESSENTIAL_PRODUCT_DATA,
-    ESSENTIAL_PRODUCT_KEYS,
-    QUANTITIES_OF_PRODUCTS_FOR_EACH_CATEGORY,
-)
+
+from ressources.constants import (ESSENTIAL_PRODUCT_DATA,
+                                  ESSENTIAL_PRODUCT_KEYS, PAYLOAD,
+                                  QUANTITIES_OF_PRODUCTS_FOR_EACH_CATEGORY)
 
 
 class Api:

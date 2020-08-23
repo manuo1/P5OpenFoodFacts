@@ -1,4 +1,5 @@
 import os
+
 from ressources.constants import YES_NO_ANSWERS
 
 

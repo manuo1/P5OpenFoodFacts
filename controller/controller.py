@@ -1,9 +1,10 @@
 from random import sample
-from database.database import DataBase
-from views.view import View
+
 from api.api import Api
+from database.database import DataBase
 from models.product import Product
 from ressources.constants import PRODUCT_QUANTITY_FOR_CHOOSE
+from views.view import View
 
 
 class Controller:
