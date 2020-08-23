@@ -1,8 +1,7 @@
---create database
 DROP DATABASE IF EXISTS P5_data_base;
 CREATE DATABASE IF NOT EXISTS P5_data_base;
 USE P5_data_base;
---create tables
+
 DROP TABLE IF EXISTS categories;
 CREATE TABLE IF NOT EXISTS categories(
 	id_category	SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -24,6 +23,20 @@ CREATE TABLE IF NOT EXISTS products(
 	        FOREIGN KEY (id_category)
 	        REFERENCES categories(id_category),
 	PRIMARY KEY(id_product)
+)
+ENGINE=INNODB;
+
+DROP TABLE IF EXISTS favorites;
+CREATE TABLE IF NOT EXISTS favorites(
+  id_favorite	SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	id_product_S SMALLINT UNSIGNED NOT NULL,
+	id_product_R SMALLINT UNSIGNED NOT NULL,
+	CONSTRAINT fk_products_id_product
+	        FOREIGN KEY (id_product_S)
+	        REFERENCES products(id_product),
+					FOREIGN KEY (id_product_R)
+	        REFERENCES products(id_product),
+	PRIMARY KEY(id_favorite)
 )
 ENGINE=INNODB;
 

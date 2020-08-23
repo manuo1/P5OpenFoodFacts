@@ -28,6 +28,20 @@ QUERY_CREATE_TABLE_PRODUCTS = (
                     '        REFERENCES categories(id_category),'
                     'PRIMARY KEY(id_product))'
                     'ENGINE=INNODB')
+QUERY_DROP_TABLE_FAVORITES = (
+                    'DROP TABLE IF EXISTS favorites')
+QUERY_CREATE_TABLE_FAVORITES = (
+                    'CREATE TABLE IF NOT EXISTS favorites('
+                    'id_favorite	SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,'
+                	'id_product_S SMALLINT UNSIGNED NOT NULL,'
+                    'id_product_R SMALLINT UNSIGNED NOT NULL,'
+                    'CONSTRAINT fk_products_id_product'
+	                '  FOREIGN KEY (id_product_S)'
+	                '  REFERENCES products(id_product),'
+			        '  FOREIGN KEY (id_product_R)'
+	                '  REFERENCES products(id_product),'
+                    '  PRIMARY KEY(id_favorite))'
+                    '  ENGINE=INNODB')
 QUERY_INSERT_CATEGORIES_VALUES = (
                     'INSERT INTO categories (category_name)'
                     'VALUES'
@@ -68,6 +82,7 @@ QUERY_CREATION_LIST = [QUERY_DROP_DATABASE, QUERY_CREATE_DATABASE,
                        QUERY_USE_DATABASE, QUERY_DROP_TABLE_CATEGORIES,
                        QUERY_CREATE_TABLE_CATEGORIES,
                        QUERY_DROP_TABLE_PRODUCTS, QUERY_CREATE_TABLE_PRODUCTS,
+                       QUERY_DROP_TABLE_FAVORITES, QUERY_CREATE_TABLE_FAVORITES,
                        QUERY_INSERT_CATEGORIES_VALUES]
 QUANTITIES_OF_PRODUCTS_FOR_EACH_CATEGORY = 200
 PRODUCT_QUANTITY_FOR_CHOOSE = 20

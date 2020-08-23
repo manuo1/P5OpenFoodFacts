@@ -36,8 +36,12 @@ class Controller():
         replacement_product_list = self.database.get_product_by_nutriscore(product_to_replace)
         if replacement_product_list:
             replacement_object_list =self.transform_into_object(replacement_product_list)
-            random_replacement_object_dict = self.choose_random_products(replacement_object_list, 3)
-            chosen_replacment_product = self.view.choose_replacment_product(product_to_replace, random_replacement_object_dict)
+            best_replacement_object_dict = self.choose_best_replacement_products(replacement_object_list)
+            chosen_replacement_product = self.view.choose_replacement_product(product_to_replace, best_replacement_object_dict)
+            if chosen_replacement_product:
+                need_to_save = self.view.save_chosen_replacement_product(product_to_replace, chosen_replacement_product)
+            else:
+                pass
         else:
             self.view.no_replacment_product(product_to_replace)
             self.scenario_substitute_a_product()
@@ -78,3 +82,14 @@ class Controller():
         for index, product in enumerate(random_list):
             random_object_dict[index+1] = product
         return random_object_dict
+
+    def choose_best_replacement_products(self, replacement_object_list):
+        sorted_replacement_object_list = sorted(replacement_object_list, key=lambda product: product.nutriscore_grade)
+        if len(sorted_replacement_object_list) > 3:
+            best_replacement_object_list = sorted_replacement_object_list[0:3]
+        else:
+            best_replacement_object_list = sorted_replacement_object_list
+        best_replacement_object_dict = {}
+        for index, product in enumerate(best_replacement_object_list):
+            best_replacement_object_dict[index+1] = product
+        return best_replacement_object_dict

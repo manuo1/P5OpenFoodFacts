@@ -43,8 +43,8 @@ class View():
         self.double_line_msg("Liste d'aliments de la catégorie :")
         for key,product in random_object_dict.items():
             print("{} : {} (nutriscore {})".format(key,
-                                                   product.generic_name_fr,
-                                                   product.nutriscore_grade))
+                                self.limit_string_size(product.generic_name_fr),
+                                product.nutriscore_grade))
         self.double_line_msg("Quel aliment voulez vous substituer ?")
         try:
             chosen_product = int(input())
@@ -58,17 +58,17 @@ class View():
             product_to_replace = self.choose_product(random_object_dict)
         return product_to_replace
 
-    def choose_replacment_product(self, product_to_replace, random_replacement_object_dict):
+    def choose_replacement_product(self, product_to_replace, random_replacement_object_dict):
         max_key = max(random_replacement_object_dict.keys())
         self.double_line_msg("les produits suivant appartiennent à la meme\n"
                              "categorie mais on un meilleur nutriscore que\n"
-                             "{} (nutriscore {})".format(product_to_replace.generic_name_fr,
+                             "{} (nutriscore {})".format(self.limit_string_size(product_to_replace.generic_name_fr),
                                                          product_to_replace.nutriscore_grade))
         for key,product in random_replacement_object_dict.items():
             print("{} : {} (nutriscore {})".format(key,
-                                                   product.generic_name_fr,
+                                                   self.limit_string_size(product.generic_name_fr),
                                                    product.nutriscore_grade))
-        self.double_line_msg("Quel aliment voulez vous sauvegarder ?")
+        self.double_line_msg("Quel aliment voulez vous afficher ?")
         try:
             chosen_product = int(input())
             if chosen_product not in random_replacement_object_dict.keys():
@@ -84,16 +84,37 @@ class View():
     def no_replacment_product(self, product_to_replace):
         self.double_line_msg("désolé mais il n'existe pas de produit\n"
                              "de remplacement dans cette categorie pour\n"
-                             "{} (nutriscore {})".format(product_to_replace.generic_name_fr,
-                                                         product_to_replace.nutriscore_grade))
+                             "{} (nutriscore {})".format(self.limit_string_size(product_to_replace.generic_name_fr), product_to_replace.nutriscore_grade))
+    def save_chosen_replacement_product(self, product_to_replace, chosen_replacement_product):
+        print('vous pouvez remplacer\n'
+              '{} (nutriscore {})\n'
+              'par :\n'
+              '{} (nutriscore {})\n'
+              "magasin ou l'acheter :\n"
+              '{}\n'
+              "Lien vers la page d'Open Food Facts :\n"
+              '{}\n'
+              .format(self.limit_string_size(product_to_replace.generic_name_fr),
+                      product_to_replace.nutriscore_grade,
+                      self.limit_string_size(chosen_replacement_product.generic_name_fr),
+                      chosen_replacement_product.nutriscore_grade,
+                      chosen_replacement_product.purchase_places,
+                      chosen_replacement_product.url))
 
     def wrong_user_response_message(self,number):
-        print("\n#####################################################\n"
+        print("\n############################################################\n"
               "Votre reponse doit être un chifre de 1 à {}\n"
-              "#####################################################\n"
+              "############################################################\n"
               .format(number))
     def double_line_msg(self,msg):
-        print('\n---------------------------------------------------------\n'
+        print('\n------------------------------------------------------------\n'
               '{} \n'
-              '---------------------------------------------------------\n'
+              '------------------------------------------------------------\n'
               .format(msg))
+
+    def limit_string_size(self, string):
+        if len(string)> 65:
+            limited_string = string[:65] + '(...)'
+        else :
+            limited_string = string
+        return limited_string
