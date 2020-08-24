@@ -63,7 +63,7 @@ class View():
             print("{} : {} (nutriscore {})".format(
                                                 key,
                                                 self.limit_string_size(
-                                                    product.generic_name_fr),
+                                                    product.product_name_fr),
                                                 product.nutriscore_grade))
         self.double_line_msg("Quel aliment voulez vous substituer ?")
         try:
@@ -87,14 +87,14 @@ class View():
                              "{} (nutriscore {})"
                              .format(
                                 self.limit_string_size(
-                                    product_to_replace.generic_name_fr),
+                                    product_to_replace.product_name_fr),
                                 product_to_replace.nutriscore_grade))
         for key, product in random_replacement_object_dict.items():
             print("{} : {} (nutriscore {})"
                   .format(
                     key,
                     self.limit_string_size(
-                        product.generic_name_fr),
+                        product.product_name_fr),
                     product.nutriscore_grade))
         self.double_line_msg("Quel aliment voulez vous afficher ?")
         try:
@@ -119,7 +119,7 @@ class View():
             "désolé mais il n'existe pas de produit\n"
             "de remplacement dans cette categorie pour\n"
             "{} (nutriscore {})".format(
-                self.limit_string_size(product_to_replace.generic_name_fr),
+                self.limit_string_size(product_to_replace.product_name_fr),
                 product_to_replace.nutriscore_grade))
 
     def save_chosen_replacement_product(self, product_A, product_B):
@@ -127,15 +127,15 @@ class View():
             to ask if user want to save this product"""
         self.double_line_msg('vous pouvez remplacer')
         print('{} (nutriscore {})'.format(
-            self.limit_string_size(product_A.generic_name_fr),
+            self.limit_string_size(product_A.product_name_fr),
             product_A.nutriscore_grade))
         self.double_line_msg('par :')
         print('   {} (nutriscore {})\n'
               "magasin ou l'acheter :\n   {}\n"
               "Lien vers la page d'Open Food Facts :\n   {}\n"
-              .format(self.limit_string_size(product_B.generic_name_fr),
+              .format(self.limit_string_size(product_B.product_name_fr),
                       product_B.nutriscore_grade,
-                      product_B.purchase_places,
+                      product_B.stores,
                       product_B.url))
 
         self.double_line_msg('Voulez vous sauvergarder ce résultat ? (O/N)')
@@ -159,10 +159,10 @@ class View():
             size = self.terminal_width() - 5
             print('\n' + ('-' * size))
             print('le produits :\n   {}\npeut etre remplacé par:'.format(
-                self.limit_string_size(object_product_S.generic_name_fr)))
+                self.limit_string_size(object_product_S.product_name_fr)))
             for product in object_product_R_list:
                 print('   {}'
-                      .format(self.limit_string_size(product.generic_name_fr)))
+                      .format(self.limit_string_size(product.product_name_fr)))
 
     def incorrect_entry_msg_y_n(self):
         """ message for incorrect user answer"""

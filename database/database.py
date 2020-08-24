@@ -54,10 +54,10 @@ class DataBase:
             for product in products:
                 try:
                     data_to_add = (
-                        product.generic_name_fr,
+                        product.product_name_fr,
                         product.nutriscore_grade,
                         product.url,
-                        product.purchase_places,
+                        product.stores,
                         product.code,
                         product.id_category,
                     )

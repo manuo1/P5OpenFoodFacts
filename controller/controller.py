@@ -124,10 +124,10 @@ class Controller:
         """transform products into objects"""
         product_object = Product()
         product_object.id_product = product[0]
-        product_object.generic_name_fr = product[1]
+        product_object.product_name_fr = product[1]
         product_object.nutriscore_grade = product[2]
         product_object.url = product[3]
-        product_object.purchase_places = product[4]
+        product_object.stores = product[4]
         product_object.code = product[5]
         product_object.id_category = product[6]
         return product_object

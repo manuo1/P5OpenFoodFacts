@@ -13,10 +13,10 @@ ENGINE=INNODB;
 DROP TABLE IF EXISTS products;
 CREATE TABLE IF NOT EXISTS products(
 	id_product	SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-	generic_name_fr	VARCHAR(255) NOT NULL,
+	product_name_fr	VARCHAR(255) NOT NULL,
 	nutriscore_grade	CHAR(1) NOT NULL,
 	url	VARCHAR(255) NOT NULL,
-	purchase_places	VARCHAR(100),
+	stores	VARCHAR(100),
 	code BIGINT UNSIGNED,
 	id_category SMALLINT UNSIGNED,
 	CONSTRAINT fk_categories_id_category

@@ -13,10 +13,10 @@ QUERY_DROP_TABLE_PRODUCTS = 'DROP TABLE IF EXISTS products'
 QUERY_CREATE_TABLE_PRODUCTS = (
     'CREATE TABLE IF NOT EXISTS products('
     'id_product	SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,'
-    'generic_name_fr	VARCHAR(255) NOT NULL,'
+    'product_name_fr	VARCHAR(255) NOT NULL,'
     'nutriscore_grade	CHAR(1) NOT NULL,'
     'url	VARCHAR(255) NOT NULL,'
-    'purchase_places	VARCHAR(100),'
+    'stores	VARCHAR(100),'
     'code BIGINT UNSIGNED,'
     'id_category SMALLINT UNSIGNED,'
     'CONSTRAINT fk_categories_id_category'
@@ -50,10 +50,10 @@ QUERY_INSERT_CATEGORIES_VALUES = (
 )
 QUERY_INSERT_DATA_TO_PRODUCTS_TABLE = (
     "INSERT INTO products ("
-    "generic_name_fr, "
+    "product_name_fr, "
     "nutriscore_grade, "
     "url, "
-    "purchase_places, "
+    "stores, "
     "code, "
     "id_category) "
     "VALUES (%s, %s, %s, %s, %s, %s)"
@@ -84,13 +84,13 @@ PAYLOAD = {
     "json": 1,
 }
 ESSENTIAL_PRODUCT_KEYS = [
-    'generic_name_fr',
+    'product_name_fr',
     'nutriscore_grade',
     'url',
-    'purchase_places',
+    'stores',
     'code',
 ]
-ESSENTIAL_PRODUCT_DATA = ['generic_name_fr', 'nutriscore_grade', 'url', 'code']
+ESSENTIAL_PRODUCT_DATA = ['product_name_fr', 'nutriscore_grade', 'url', 'code']
 
 QUERY_CREATION_LIST = [
     QUERY_DROP_DATABASE,
