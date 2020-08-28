@@ -22,6 +22,7 @@ class DataBase:
     # if connection error return the error
     except mysql.connector.Error as connect_error:
         print(connect_error)
+        quit()
 
     def __init__(self):
         self.categories_dict = {}
@@ -62,8 +63,8 @@ class DataBase:
                         product.id_category,
                     )
                     DataBase.cursor.execute(insert_request, data_to_add)
-                except:
-                    pass
+                except mysql.connector.Error as connect_error:
+                    print(connect_error)
             DataBase.connection.commit()
         except mysql.connector.Error as connect_error:
             print(connect_error)
@@ -78,8 +79,8 @@ class DataBase:
                     id_product_R.id_product,
                 )
                 DataBase.cursor.execute(insert_request, data_to_add)
-            except:
-                pass
+            except mysql.connector.Error as connect_error:
+                print(connect_error)
             DataBase.connection.commit()
         except mysql.connector.Error as connect_error:
             print(connect_error)
