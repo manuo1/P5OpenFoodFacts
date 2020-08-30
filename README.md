@@ -29,7 +29,7 @@ Le programme a été développé en langage python dans un environnement virtuel
 
 		python main.py
 
-	5. __IMPORTANT__ :
+	5. **IMPORTANT** :
 
     	A la première instalation il serra indispensable d'installer la base de données en
     	choisissant le scenario 3 du menu princial
