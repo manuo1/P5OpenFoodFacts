@@ -9,9 +9,9 @@ Le programme a été développé en langage python dans un environnement virtuel
 
 	1. Il est nécessaire pour le faire fonctionner d’installer:
 
-		1. Python
-		2. pip
-		3. MySQL
+		- Python
+		- pip
+		- MySQL
 
 	2. Renseigner votre mot de passe MySQL :
 
@@ -29,7 +29,7 @@ Le programme a été développé en langage python dans un environnement virtuel
 
 		python main.py
 
-	5. *IMPORTANT* :
+	5. __IMPORTANT__ :
 
     	A la première instalation il serra indispensable d'installer la base de données en
     	choisissant le scenario 3 du menu princial
