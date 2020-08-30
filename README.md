@@ -1,16 +1,16 @@
-#--------------------------------------------- *DESCRIPTION* ---------------------------------------------
-
+--------------------------------------------- DESCRIPTION ---------------------------------------------
+=======================================================================================================
 Ce programme interagit avec la base Open Food Facts pour en récupérer les aliments, les comparer
 et proposer à l'utilisateur un substitut plus sain à un aliment qu’il a choisi.
 
-#--------------------------------------------- *INSTALATION* ---------------------------------------------
-
+--------------------------------------------- INSTALATION ---------------------------------------------
+=======================================================================================================
 Le programme a été développé en langage python dans un environnement virtuel.
 
 1 - Il est nécessaire pour le faire fonctionner d’installer :
-	* *Python*
-	* *pip*
-	* *MySQL*
+	* Python
+	* pip
+	* MySQL
 
 2 - Vous devez ensuite modifier le fichier :
 		« main\ressources\user_connection.yaml »
@@ -28,8 +28,8 @@ Le programme a été développé en langage python dans un environnement virtuel
     	A la première instalation il serra indispensable d'installer la base de données en
     	choisissant le scenario 3 du menu princial
 
-#-------------------------------------------- *FONCTIONNEMENT* -------------------------------------------
-
+-------------------------------------------- FONCTIONNEMENT -------------------------------------------
+=======================================================================================================
 Le menu principal du programme vous propose 4 options :
 
 	1 - Remplacer un aliment
