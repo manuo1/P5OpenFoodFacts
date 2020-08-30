@@ -15,18 +15,24 @@ class Api:
         for category_id, category_name in categories_dict.items():
             PAYLOAD["tag_0"] = category_name
             PAYLOAD["page_size"] = QUANTITIES_OF_PRODUCTS_FOR_EACH_CATEGORY * 2
-            server_response = requests.get(
-                "https://fr.openfoodfacts.org/cgi/search.pl?", params=PAYLOAD
-            )
-            if server_response.status_code == 200:
-                results = server_response.json()
-                temp_raw_api_products = results["products"]
-                # add category_id to product
-                for product in temp_raw_api_products:
-                    product['id_category'] = category_id
-                    raw_api_products.append(product)
-            else:
-                print(server_response.status_code)
+            try:
+                server_response = requests.get(
+                    "https://fr.openfoodfacts.org/cgi/search.pl?",
+                    params=PAYLOAD
+                )
+                if server_response.status_code == 200:
+                    results = server_response.json()
+                    temp_raw_api_products = results["products"]
+                    # add category_id to product
+                    for product in temp_raw_api_products:
+                        product['id_category'] = category_id
+                        raw_api_products.append(product)
+                else:
+                    raw_api_products = 'Connection OFF impossible'
+            except Exception as pb:
+                print(pb)
+                raw_api_products = 'Connection OFF impossible'
+                break
         return raw_api_products
 
     def clean_products(self, raw_api_products):

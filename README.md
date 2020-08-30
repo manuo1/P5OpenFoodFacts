@@ -1,33 +1,65 @@
-the program was developed in python language in a virtual environment.
+############################## DESCRIPTION ##############################
 
-It requires to operate :
-	
-	pyhton, pip and mysql
+Ce programme interagi avec la base Open Food Facts pour en récupérer les aliments, les comparer
+et proposer à l'utilisateur un substitut plus sain à un aliment qu’il a choisi.
 
-In ressources folder create a YAML file named connection.yaml and insert inside :
+############################## INSTALATION ##############################
+Le programme a été développé en langage python dans un environnement virtuel.
+1 - Il est nécessaire pour le faire fonctionner d’installer :
+	- Python
+	- pip
+	- MySQL
 
-host: 'localhost'
-user: 'root'
-password: 'Your Password here'
+2 - Vous devez ensuite modifier le fichier :
+		« main\ressources\user_connection.yaml »
+	Et remplacer :
+		'votre mot de passe ici'
+		Par votre mot de passe de connexion à MySQL (Les ' ' sont importants)
 
-replace (Your Password here) with your mysql password 
+3 - Puis dans un terminal placer vous dans le fichier « main » et lancez l’installation avec :
+		pip install -r requirements.txt
 
-Then at the root of the project, in a terminal launch the program with :
+4 – Enfin lancez le programme avec :
+		python main.py
 
-	pip install -r requirements.txt
+5 - Important : 
+    	A la première instalation il serra indispensable d'installer la base de données en
+    	choisissant le scenario 3 du menu princial
 
-and run with
+############################ FONCTIONNEMENT ############################
 
-	python main.py
+Le menu principal du programme vous propose 4 options :
 
-Using :
+	1 - Remplacer un aliment
+	2 - Retrouver mes aliments substitués
+	3 - Réinstaller la base de données
+	4 - Quitter le programme
 
--------------------------------------------------------------------------------------------------------------------
-Que souhaitez vous faire ?
--------------------------------------------------------------------------------------------------------------------
+Choisissez en saisissant le numéro du scenario voulut puis appuyez sur Entrée pour valider.
 
-1 - Remplacer un aliment
-2 - Retrouver mes aliments substitués
-3 - Réinstaller la base de donnée
-4 - Quitter le programe
+Etapes du scénario 1 (Remplacer un aliment)
+	1.Dans quelle catégorie voulez-vous substituer l'aliment ?
+		Le programme vous propose 5 catégories d’aliments.
+	2.Quel aliment voulez-vous substituer ?
+		Le programme vous propose 20 aliments choisis au hasard dans la catégorie choisie précédemment,
+		vous choisissez en saisissant le numéro de l'aliment voulut puis appuyez sur Entrée pour valider.
+	3.Quel aliment voulez-vous afficher ?
+		S’ils existent le programme vous propose un maximum de 3 aliments avec un meilleur Nutri-Score,
+		vous choisissez en saisissant le numéro de l'aliment voulut puis appuyez sur Entrée pour valider.
+	4.Voulez-vous sauvegarder ce résultat ? (O/N)
+		Pour chaque aliment enregistrer, le programme affiche le nom, le Nutri-Score, une liste des
+		magasins ou acheter le aliment et le lien vers la page de l'aliment sur le site d’Open Food Facts,
+		puis il vous propose de sauvegarder un de ces aliment, vous choisissez en saisissant O pour Oui
+		ou N pour Non puis appuyez sur Entrée pour valider, le programme retourne au menu principal.
 
+Etapes du scénario 2 (Retrouver mes aliments substitués)
+	Le Programme affiche chaque aliment remplacé avec son ou ses aliments de substitution et les détails
+	des aliments de substitution, le programme retourne au menu principal.
+
+Etapes du Scénario 3 (Réinstaller la base de données)
+	Le programme va récupérer des aliments pour chaque catégorie dans l’API d’Open Food Facts et
+	« nettoyer » les résultats récoltés, ensuite il vide la base de données locale en supprimant et
+	recréant les tables puis il y insert les nouvelles données récoltées et retourne au menu principal.
+
+Etapes du Scénario 4 (Quitter le programme)
+	Vous sortez du programme

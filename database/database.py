@@ -35,6 +35,7 @@ class DataBase:
             DataBase.connection.commit()
         except mysql.connector.Error as connect_error:
             print(connect_error)
+            quit()
 
     def select_database(self):
         DataBase.cursor.execute(QUERY_USE_DATABASE)
@@ -67,7 +68,9 @@ class DataBase:
                     print(connect_error)
             DataBase.connection.commit()
         except mysql.connector.Error as connect_error:
+            print('Impossible d\'ajouter les produits à la table')
             print(connect_error)
+            quit()
 
     def add_favorites(self, id_product_S, id_product_R):
         """add favorites to products table"""

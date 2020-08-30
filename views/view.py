@@ -23,7 +23,7 @@ class View():
         print('1 - Remplacer un aliment\n'
               '2 - Retrouver mes aliments substitués\n'
               '3 - Réinstaller la base de données\n'
-              '4 - Quitter le programe')
+              '4 - Quitter le programme')
         try:
             user_answer = int(input())
         except ValueError:
@@ -78,8 +78,8 @@ class View():
                                    random_replacement_object_dict):
         """ view to choose one of the 3 best replacement product"""
         max_key = max(random_replacement_object_dict.keys())
-        self.double_line_msg('Les produits suivants appartiennent à la même\n'
-                             'catégorie mais on un meilleur Nutri-Score que\n'
+        self.double_line_msg('Les aliments suivants appartiennent à la même\n'
+                             'catégorie mais ont un meilleur Nutri-Score que\n'
                              '{} (Nutri-Score {})'
                              .format(
                                 self.limit_string_size(
@@ -112,7 +112,7 @@ class View():
     def no_replacement_product(self, product_to_replace):
         """ view if there is no replacement product"""
         self.double_line_msg(
-            'Désolé mais il n\'existe pas de produit\n'
+            'Désolé mais il n\'existe pas d\' aliment\n'
             'de remplacement dans cette catégorie pour\n'
             '{} (Nutri-Score {})'.format(
                 self.limit_string_size(product_to_replace.product_name_fr),
@@ -121,11 +121,10 @@ class View():
     def save_chosen_replacement_product(self, product_A, product_B):
         """ view display the better replacement product and
             to ask if user want to save this product"""
-        self.double_line_msg('Vous pouvez remplacer')
-        print('{} (Nutri-Score {})'.format(
+        self.double_line_msg(
+        ('L\' aliment : {} (Nutri-Score {})'.format(
             self.limit_string_size(product_A.product_name_fr),
-            product_A.nutriscore_grade))
-        self.double_line_msg('par :')
+            product_A.nutriscore_grade)))
         self.displays_all_product_info(product_B.product_name_fr,
                                        product_B.nutriscore_grade,
                                        product_B.stores,
@@ -142,12 +141,12 @@ class View():
     def display_favorites(self, favorite_objects_dict):
         """ view to display the favorites"""
         print('\n' * 100)
-        self.double_line_msg('Liste des produits sauvegardés :')
+        self.double_line_msg('Liste des aliments sauvegardés :')
         for object_product_S in favorite_objects_dict.keys():
             object_product_R_list = favorite_objects_dict[object_product_S]
             size = self.terminal_width() - 5
             print('\n' + ('*' * size))
-            print('Le produit :\n   {} (Nutri-Score {})'.format(
+            print('L\' aliment :\n   {} (Nutri-Score {})'.format(
                 self.limit_string_size(object_product_S.product_name_fr),
                 object_product_S.nutriscore_grade))
             for product in object_product_R_list:
@@ -157,7 +156,7 @@ class View():
                                                product.url)
 
     def displays_all_product_info(self, product_name_fr, nutriscore_grade, stores, url):
-        print('Peut être remplacé par:\n'
+        print('Peut être remplacé par:\n\n'
               '   {} (Nutri-Score {})\n'
               '   -Magasin(s) ou l\'acheter :\n'
               '    {}\n'
@@ -165,6 +164,11 @@ class View():
               '    {}'
               .format(self.limit_string_size(product_name_fr), nutriscore_grade,
                       stores, url))
+
+    def connection_off_impossible(self):
+        self.double_line_msg('Impossible de télécharger les aliments depuis\n'
+                              'l\'API d\'Open Food Facts\n'
+                              'La base de données n\'a pas été réinstallée')
 
     def incorrect_entry_msg_y_n(self):
         """ message for incorrect user answer"""
