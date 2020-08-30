@@ -8,23 +8,28 @@ et proposer à l'utilisateur un substitut plus sain à un aliment qu’il a choi
 Le programme a été développé en langage python dans un environnement virtuel.
 
 1 - Il est nécessaire pour le faire fonctionner d’installer :
+-------------------------------------------------------------
 	* Python
 	* pip
 	* MySQL
 
 2 - Vous devez ensuite modifier le fichier :
+--------------------------------------------
 		« main\ressources\user_connection.yaml »
 	Et remplacer :
 		'votre mot de passe ici'
 		Par votre mot de passe de connexion à MySQL (Les ' ' sont importants)
 
 3 - Puis dans un terminal placer vous dans le fichier « main » et lancez l’installation avec :
+----------------------------------------------------------------------------------------------
 		pip install -r requirements.txt
 
 4 – Enfin lancez le programme avec :
+------------------------------------
 		python main.py
 
 5 - *IMPORTANT* :
+-----------------
     	A la première instalation il serra indispensable d'installer la base de données en
     	choisissant le scenario 3 du menu princial
 
@@ -39,7 +44,8 @@ Le menu principal du programme vous propose 4 options :
 
 Choisissez en saisissant le numéro du scenario voulut puis appuyez sur Entrée pour valider.
 
-*Etapes du scénario 1 (Remplacer un aliment)
+Etapes du scénario 1 (Remplacer un aliment)
+-------------------------------------------
 
 	1 - Dans quelle catégorie voulez-vous substituer l'aliment ?
 		Le programme vous propose 5 catégories d’aliments.
@@ -55,17 +61,19 @@ Choisissez en saisissant le numéro du scenario voulut puis appuyez sur Entrée 
 		puis il vous propose de sauvegarder un de ces aliment, vous choisissez en saisissant O pour Oui
 		ou N pour Non puis appuyez sur Entrée pour valider, le programme retourne au menu principal.
 
-*Etapes du scénario 2 (Retrouver mes aliments substitués)
+Etapes du scénario 2 (Retrouver mes aliments substitués)
+--------------------------------------------------------
 
 	Le Programme affiche chaque aliment remplacé avec son ou ses aliments de substitution et les détails
 	des aliments de substitution, le programme retourne au menu principal.
 
-*Etapes du Scénario 3 (Réinstaller la base de données)
+Etapes du Scénario 3 (Réinstaller la base de données)
+-----------------------------------------------------
 
 	Le programme va récupérer des aliments pour chaque catégorie dans l’API d’Open Food Facts et
 	« nettoyer » les résultats récoltés, ensuite il vide la base de données locale en supprimant et
 	recréant les tables puis il y insert les nouvelles données récoltées et retourne au menu principal.
 
-*Etapes du Scénario 4 (Quitter le programme)
-
+Etapes du Scénario 4 (Quitter le programme)
+-------------------------------------------
 	Vous sortez du programme
