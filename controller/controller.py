@@ -105,10 +105,12 @@ class Controller:
         if instal_msg == 'O' or instal_msg == 'o':
             categories_dict = self.database.get_categories_dict()
             raw_api_products = self.api.download_products(categories_dict)
-            if raw_api_products == 'Connection OFF impossible':
+            if not raw_api_products:
                 self.view.connection_off_impossible()
             else:
-                cleaned_products_list = self.api.clean_products(raw_api_products)
+                cleaned_products_list = self.api.clean_products(
+                    raw_api_products
+                )
                 product_list = self.transform_prod_list_into_obj_list(
                     cleaned_products_list
                 )

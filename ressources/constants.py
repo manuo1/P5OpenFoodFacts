@@ -68,19 +68,14 @@ QUERY_INSERT_DATA_TO_FAVORITES_TABLE = (
 
 PAYLOAD = {
     "search_terms": "",
-    # categories contient :
     "tagtype_0": "categories",
     "tag_contains_0": "contains",
     "tag_0": "",
-    # produits avec un nutriscore
     "nutriment_0": "nutrition-score-fr",
     "nutriment_compare_0": "gt",
     "nutriment_value_0": 0,
-    # trié par popularité
     "sort_by": "Popularity",
-    # 500 resultat sur la page
     "page_size": 1,
-    # resultat en json
     "json": 1,
 }
 ESSENTIAL_PRODUCT_KEYS = [

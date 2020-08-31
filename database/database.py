@@ -1,9 +1,11 @@
 import mysql.connector
 
-from ressources.constants import (QUERY_CREATION_LIST,
-                                  QUERY_INSERT_DATA_TO_FAVORITES_TABLE,
-                                  QUERY_INSERT_DATA_TO_PRODUCTS_TABLE,
-                                  QUERY_USE_DATABASE)
+from ressources.constants import (
+    QUERY_CREATION_LIST,
+    QUERY_INSERT_DATA_TO_FAVORITES_TABLE,
+    QUERY_INSERT_DATA_TO_PRODUCTS_TABLE,
+    QUERY_USE_DATABASE,
+)
 from ressources.settings import CONNECTION_DATA
 
 
@@ -68,12 +70,11 @@ class DataBase:
                     print(connect_error)
             DataBase.connection.commit()
         except mysql.connector.Error as connect_error:
-            print('Impossible d\'ajouter les produits à la table')
             print(connect_error)
             quit()
 
     def add_favorites(self, id_product_S, id_product_R):
-        """add favorites to products table"""
+        """add favorites to favorites table"""
         try:
             insert_request = QUERY_INSERT_DATA_TO_FAVORITES_TABLE
             try:

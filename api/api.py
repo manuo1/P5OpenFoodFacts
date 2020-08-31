@@ -1,8 +1,11 @@
 import requests
 
-from ressources.constants import (ESSENTIAL_PRODUCT_DATA,
-                                  ESSENTIAL_PRODUCT_KEYS, PAYLOAD,
-                                  QUANTITIES_OF_PRODUCTS_FOR_EACH_CATEGORY)
+from ressources.constants import (
+    ESSENTIAL_PRODUCT_DATA,
+    ESSENTIAL_PRODUCT_KEYS,
+    PAYLOAD,
+    QUANTITIES_OF_PRODUCTS_FOR_EACH_CATEGORY,
+)
 
 
 class Api:
@@ -18,7 +21,7 @@ class Api:
             try:
                 server_response = requests.get(
                     "https://fr.openfoodfacts.org/cgi/search.pl?",
-                    params=PAYLOAD
+                    params=PAYLOAD,
                 )
                 if server_response.status_code == 200:
                     results = server_response.json()
@@ -28,10 +31,10 @@ class Api:
                         product['id_category'] = category_id
                         raw_api_products.append(product)
                 else:
-                    raw_api_products = 'Connection OFF impossible'
+                    raw_api_products = False
             except Exception as pb:
                 print(pb)
-                raw_api_products = 'Connection OFF impossible'
+                raw_api_products = False
                 break
         return raw_api_products
 

@@ -3,14 +3,15 @@ import os
 from ressources.constants import YES_NO_ANSWERS
 
 
-class View():
+class View:
     def __init__(self):
         pass
 
     def ask_to_instal_data_base(self):
         """ view to ask if user really want to reinstal the database"""
         self.double_line_msg(
-            'Voulez-vous vraiment réinstaller la base de données ? (O/N)')
+            'Voulez-vous vraiment réinstaller la base de données ? (O/N)'
+        )
         db_install = input()
         if db_install not in YES_NO_ANSWERS:
             self.incorrect_entry_msg_y_n()
@@ -20,10 +21,12 @@ class View():
     def choose_scenario(self):
         """ view to choose the scenario"""
         self.double_line_msg('Que souhaitez-vous faire ?')
-        print('1 - Remplacer un aliment\n'
-              '2 - Retrouver mes aliments substitués\n'
-              '3 - Réinstaller la base de données\n'
-              '4 - Quitter le programme')
+        print(
+            '1 - Remplacer un aliment\n'
+            '2 - Retrouver mes aliments substitués\n'
+            '3 - Réinstaller la base de données\n'
+            '4 - Quitter le programme'
+        )
         try:
             user_answer = int(input())
         except ValueError:
@@ -37,8 +40,9 @@ class View():
     def choose_category(self, categories_dict):
         """ view to choose the category"""
         max_key = max(categories_dict.keys())
-        self.double_line_msg('Dans quelle catégorie voulez'
-                             '-vous substituer l\'aliment ?')
+        self.double_line_msg(
+            'Dans quelle catégorie voulez' '-vous substituer l\'aliment ?'
+        )
         for id, category in categories_dict.items():
             print('{} : {}'.format(id, category))
         try:
@@ -56,11 +60,13 @@ class View():
         max_key = max(random_object_dict.keys())
         self.double_line_msg('Liste d\'aliments de la catégorie :')
         for key, product in random_object_dict.items():
-            print('{} : {} (Nutri-Score {})'.format(
-                                                key,
-                                                self.limit_string_size(
-                                                    product.product_name_fr),
-                                                product.nutriscore_grade))
+            print(
+                '{} : {} (Nutri-Score {})'.format(
+                    key,
+                    self.limit_string_size(product.product_name_fr),
+                    product.nutriscore_grade,
+                )
+            )
         self.double_line_msg('Quel aliment voulez-vous substituer ?')
         try:
             chosen_product_number = int(input())
@@ -74,39 +80,46 @@ class View():
             product_to_replace = self.choose_product(random_object_dict)
         return product_to_replace
 
-    def choose_replacement_product(self, product_to_replace,
-                                   random_replacement_object_dict):
+    def choose_replacement_product(
+        self, product_to_replace, random_replacement_object_dict
+    ):
         """ view to choose one of the 3 best replacement product"""
         max_key = max(random_replacement_object_dict.keys())
-        self.double_line_msg('Les aliments suivants appartiennent à la même\n'
-                             'catégorie mais ont un meilleur Nutri-Score que\n'
-                             '{} (Nutri-Score {})'
-                             .format(
-                                self.limit_string_size(
-                                    product_to_replace.product_name_fr),
-                                product_to_replace.nutriscore_grade))
+        self.double_line_msg(
+            'Les aliments suivants appartiennent à la même\n'
+            'catégorie mais ont un meilleur Nutri-Score que\n'
+            '{} (Nutri-Score {})'.format(
+                self.limit_string_size(product_to_replace.product_name_fr),
+                product_to_replace.nutriscore_grade,
+            )
+        )
         for key, product in random_replacement_object_dict.items():
-            print('{} : {} (Nutri-Score {})'
-                  .format(
+            print(
+                '{} : {} (Nutri-Score {})'.format(
                     key,
-                    self.limit_string_size(
-                        product.product_name_fr),
-                    product.nutriscore_grade))
+                    self.limit_string_size(product.product_name_fr),
+                    product.nutriscore_grade,
+                )
+            )
         self.double_line_msg('Quel aliment voulez-vous afficher ?')
         try:
             chosen_product_number = int(input())
             if chosen_product_number not in (
-                    random_replacement_object_dict.keys()):
+                random_replacement_object_dict.keys()
+            ):
                 self.incorrect_entry_msg(max_key)
                 product_to_save = self.choose_replacement_product(
-                    product_to_replace, random_replacement_object_dict)
+                    product_to_replace, random_replacement_object_dict
+                )
             else:
                 product_to_save = random_replacement_object_dict[
-                                                        chosen_product_number]
+                    chosen_product_number
+                ]
         except ValueError:
             self.incorrect_entry_msg(max_key)
             product_to_save = self.choose_replacement_product(
-                product_to_replace, random_replacement_object_dict)
+                product_to_replace, random_replacement_object_dict
+            )
         return product_to_save
 
     def no_replacement_product(self, product_to_replace):
@@ -116,26 +129,35 @@ class View():
             'de remplacement dans cette catégorie pour\n'
             '{} (Nutri-Score {})'.format(
                 self.limit_string_size(product_to_replace.product_name_fr),
-                product_to_replace.nutriscore_grade))
+                product_to_replace.nutriscore_grade,
+            )
+        )
 
     def save_chosen_replacement_product(self, product_A, product_B):
         """ view display the better replacement product and
             to ask if user want to save this product"""
         self.double_line_msg(
-        ('L\' aliment : {} (Nutri-Score {})'.format(
-            self.limit_string_size(product_A.product_name_fr),
-            product_A.nutriscore_grade)))
-        self.displays_all_product_info(product_B.product_name_fr,
-                                       product_B.nutriscore_grade,
-                                       product_B.stores,
-                                       product_B.url)
+            (
+                'L\' aliment : {} (Nutri-Score {})'.format(
+                    self.limit_string_size(product_A.product_name_fr),
+                    product_A.nutriscore_grade,
+                )
+            )
+        )
+        self.displays_all_product_info(
+            product_B.product_name_fr,
+            product_B.nutriscore_grade,
+            product_B.stores,
+            product_B.url,
+        )
 
         self.double_line_msg('Voulez-vous sauvegarder ce résultat ? (O/N)')
         need_to_save = input()
         if need_to_save not in YES_NO_ANSWERS:
             self.incorrect_entry_msg_y_n()
             need_to_save = self.save_chosen_replacement_product(
-                product_A, product_B)
+                product_A, product_B
+            )
         return need_to_save
 
     def display_favorites(self, favorite_objects_dict):
@@ -146,29 +168,43 @@ class View():
             object_product_R_list = favorite_objects_dict[object_product_S]
             size = self.terminal_width() - 5
             print('\n' + ('*' * size))
-            print('L\' aliment :\n   {} (Nutri-Score {})'.format(
-                self.limit_string_size(object_product_S.product_name_fr),
-                object_product_S.nutriscore_grade))
+            print(
+                'L\' aliment :\n   {} (Nutri-Score {})'.format(
+                    self.limit_string_size(object_product_S.product_name_fr),
+                    object_product_S.nutriscore_grade,
+                )
+            )
             for product in object_product_R_list:
-                self.displays_all_product_info(product.product_name_fr,
-                                               product.nutriscore_grade,
-                                               product.stores,
-                                               product.url)
+                self.displays_all_product_info(
+                    product.product_name_fr,
+                    product.nutriscore_grade,
+                    product.stores,
+                    product.url,
+                )
 
-    def displays_all_product_info(self, product_name_fr, nutriscore_grade, stores, url):
-        print('Peut être remplacé par:\n\n'
-              '   {} (Nutri-Score {})\n'
-              '   -Magasin(s) ou l\'acheter :\n'
-              '    {}\n'
-              '   -Lien vers la page d\'Open Food Facts :\n'
-              '    {}'
-              .format(self.limit_string_size(product_name_fr), nutriscore_grade,
-                      stores, url))
+    def displays_all_product_info(
+        self, product_name_fr, nutriscore_grade, stores, url
+    ):
+        print(
+            'Peut être remplacé par:\n\n'
+            '   {} (Nutri-Score {})\n'
+            '   -Magasin(s) ou l\'acheter :\n'
+            '    {}\n'
+            '   -Lien vers la page d\'Open Food Facts :\n'
+            '    {}'.format(
+                self.limit_string_size(product_name_fr),
+                nutriscore_grade,
+                stores,
+                url,
+            )
+        )
 
     def connection_off_impossible(self):
-        self.double_line_msg('Impossible de télécharger les aliments depuis\n'
-                              'l\'API d\'Open Food Facts\n'
-                              'La base de données n\'a pas été réinstallée')
+        self.double_line_msg(
+            'Impossible de télécharger les aliments depuis\n'
+            'l\'API d\'Open Food Facts\n'
+            'La base de données n\'a pas été réinstallée'
+        )
 
     def incorrect_entry_msg_y_n(self):
         """ message for incorrect user answer"""
