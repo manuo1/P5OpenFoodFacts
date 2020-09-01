@@ -32,8 +32,7 @@ class Api:
                         raw_api_products.append(product)
                 else:
                     raw_api_products = False
-            except Exception as pb:
-                print(pb)
+            except Exception:
                 raw_api_products = False
                 break
         return raw_api_products

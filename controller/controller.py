@@ -34,11 +34,10 @@ class Controller:
         try:
             self.database.select_database()
             print('pas de db insatl db')
-        except:
+        except Exception:
             self.database.create_data_base()
             self.view.database_installation_warning()
             self.install_data_base('o')
-    pass
 
     def scenario_display_favorites(self):
         """scenario if user want to display favorites"""

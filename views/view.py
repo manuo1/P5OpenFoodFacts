@@ -203,7 +203,10 @@ class View:
         size = self.terminal_width() - 5
         print('\n' * 100)
         print('\n' + ('#' * size))
-        print('Première utilisation, veuillez patienter pendant l’installation de la base de données.')
+        print(
+            'Première utilisation: '
+            'veuillez patienter pendant l’installation de la base de données.'
+        )
         print(('#' * size) + '\n')
 
     def connection_off_impossible(self):
