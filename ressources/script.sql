@@ -42,13 +42,13 @@ ENGINE = INNODB;
 DROP TABLE IF EXISTS `favorites` ;
 
 CREATE TABLE IF NOT EXISTS `favorites` (
-  `id_favorite` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_product_S` SMALLINT UNSIGNED NOT NULL,
   `id_product_R` SMALLINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id_favorite`),
-  CONSTRAINT `fk_products_id_product`
+  PRIMARY KEY (`id_product_S`,`id_product_R`),
+  CONSTRAINT `fk_products_id_product_id_product_S`
     FOREIGN KEY (`id_product_S`)
     REFERENCES `products` (`id_product`),
+  CONSTRAINT `fk_products_id_product_id_product_R`
     FOREIGN KEY (`id_product_R`)
     REFERENCES `products` (`id_product`))
 ENGINE = INNODB;

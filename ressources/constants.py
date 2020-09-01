@@ -28,16 +28,16 @@ QUERY_CREATE_TABLE_PRODUCTS = (
 QUERY_DROP_TABLE_FAVORITES = 'DROP TABLE IF EXISTS favorites'
 QUERY_CREATE_TABLE_FAVORITES = (
     'CREATE TABLE IF NOT EXISTS favorites('
-    'id_favorite	SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,'
     'id_product_S SMALLINT UNSIGNED NOT NULL,'
     'id_product_R SMALLINT UNSIGNED NOT NULL,'
-    'CONSTRAINT fk_products_id_product'
+    'CONSTRAINT fk_products_id_product_id_product_S'
     '  FOREIGN KEY (id_product_S)'
     '  REFERENCES products(id_product),'
+    'CONSTRAINT fk_products_id_product_id_product_R'
     '  FOREIGN KEY (id_product_R)'
     '  REFERENCES products(id_product),'
-    '  PRIMARY KEY(id_favorite))'
-    '  ENGINE=INNODB'
+    'PRIMARY KEY(id_product_S,id_product_R))'
+    'ENGINE=INNODB'
 )
 QUERY_INSERT_CATEGORIES_VALUES = (
     'INSERT INTO categories (category_name)'

@@ -51,12 +51,12 @@ class Controller:
         favorite_objects_dict = {}
         if favorites:
             for raw in favorites:
-                if raw[1] in favorite_products_id_dict.keys():
-                    product_R_list = favorite_products_id_dict[raw[1]]
-                    product_R_list.append(raw[2])
+                if raw[0] in favorite_products_id_dict.keys():
+                    product_R_list = favorite_products_id_dict[raw[0]]
+                    product_R_list.append(raw[1])
                 else:
-                    product_R_list = [raw[2]]
-                favorite_products_id_dict[raw[1]] = product_R_list
+                    product_R_list = [raw[1]]
+                favorite_products_id_dict[raw[0]] = product_R_list
         for product_S_id in favorite_products_id_dict.keys():
             product_S = self.database.get_product_by_id(product_S_id)
             object_product_S = self.transform_product_into_object(product_S[0])
