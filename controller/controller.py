@@ -33,7 +33,6 @@ class Controller:
     def installs_database_if_not_exist(self):
         try:
             self.database.select_database()
-            print('pas de db insatl db')
         except Exception:
             self.database.create_data_base()
             self.view.database_installation_warning()
