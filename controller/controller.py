@@ -15,7 +15,7 @@ class Controller:
 
     def process(self):
         """principal menu"""
-        self.database.select_database()
+        self.installs_database_if_not_exist()
         scenario = self.view.choose_scenario()
         if scenario == 1:
             self.scenario_substitute_a_product()
@@ -29,6 +29,16 @@ class Controller:
             self.process()
         elif scenario == 4:
             quit()
+
+    def installs_database_if_not_exist(self):
+        try:
+            self.database.select_database()
+            print('pas de db insatl db')
+        except:
+            self.database.create_data_base()
+            self.view.database_installation_warning()
+            self.install_data_base('o')
+    pass
 
     def scenario_display_favorites(self):
         """scenario if user want to display favorites"""
